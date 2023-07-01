@@ -1,6 +1,6 @@
 Always run a WSL terminal and execute the command `sudo docker compose up -d`
 
-**Issue Encountered**:
+**Docker Issue**:
 
 Uninstalled the snap version of Docker and installed again by using the Docker Desktop. After restarting the PC,
 the Main class threw an error that the customer database doesn't exist.
@@ -12,6 +12,35 @@ I followed the next steps to resolve the issue:
 4. And immediately the following `docker ps --format="$FORMAT"` to display the images properly
 5. Execute the command `docker exec -it <container name> psql -U amigoscode`
 6. Wrote the command `CREATE DATABASE customer;`
+
+**Jib Credential Issue**
+
+1. Open a Linux terminal (WSL for Windows)
+2. Type the next command: "echo -n 'username:password' | base64"
+
+   - Username: The username of your Docker account
+   - Password: The password of your Docker account
+
+3. The previous command will produce a unique base64 value credential that represents your credentials for Docker.
+4. Open your Docker config.json file and enter the next values
+```json
+{
+   "auths": {
+      "https://index.docker.io/v1/": {
+         "auth": "place_your_base64_credential_here"
+      }
+   },
+   "credsStore": "desktop",
+   "credHelpers": {
+      "https://index.docker.io/v1": "pass"
+   },
+   "currentContext": "desktop-linux"
+}
+```
+
+5. Save the .json file
+6. Execute the `./mvnw clean package` (if you have Maven installed then instead of `./mvnw` write `mvn` and the rest of the command as is)
+
 
 **Useful Commands**
 
