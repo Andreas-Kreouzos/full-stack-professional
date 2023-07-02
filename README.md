@@ -55,3 +55,6 @@ I followed the next steps to resolve the issue:
 `\dt`: Lists all tables in the current database
 
 `\d`: used to list all the tables in the current database along with their associated sequences and indexes
+
+`docker run --name full-stack --rm -p 8080:8080 --network full-stack-professional_postgres andrekreou/full-stack-professional --spring.datasource.url=jdbc:postgresql://postgres:5432/customer`: Used to start the
+communication between the containerised application with the PostgreSQL container.
