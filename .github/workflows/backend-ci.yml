@@ -4,8 +4,6 @@ on:
   pull_request:
     branches:
       - master
-    paths:
-      - full-stack-professional/**
 
 jobs:
   build:
