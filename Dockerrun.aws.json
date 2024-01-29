@@ -2,7 +2,7 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
-      "name": "amigoscode-api",
+      "name": "fullstack-api",
       "image": "andrekreou/full-stack-professional:latest",
       "essential": true,
       "memory": 512,
@@ -15,7 +15,7 @@
       "environment": [
         {
           "name": "SPRING_DATASOURCE_URL",
-          "value": "jdbc:postgresql://awseb-e-gmtpap8z46-stack-awsebrdsdatabase-7zupxcnozu0w.cx0ekmmogc9h.eu-central-1.rds.amazonaws.com:5432/customer"
+          "value": "jdbc:postgresql://awseb-e-kmm4ffzqep-stack-awsebrdsdatabase-lktgqyokf21g.cx0ekmmogc9h.eu-central-1.rds.amazonaws.com:5432/customer"
         }
       ]
     }
