@@ -65,11 +65,9 @@ jobs:
           region: ${{ secrets.EB_REGION }}
           deployment_package: Dockerrun.aws.json
       - name: Commit and push Dockerrun.aws.json
-        env:
-          MY_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          git config user.name "desired-username"
-          git config user.email "desired-email"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add .
           git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}"
-          git -c http.extraHeader="AUTHORIZATION: basic $(echo -n x-access-token:$PERSONAL_ACCESS_TOKEN | base64)" push
+          git push
