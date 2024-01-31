@@ -68,9 +68,8 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
+          git config --global credential.helper store
+          git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $(echo -n x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }} | base64)"
           git add .
           git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}"
-          git remote set-url origin https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}
-          git status
-          git remote -v
           git push origin master
