@@ -68,8 +68,14 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git config --global credential.helper store
-          git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $(echo -n x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }} | base64)"
+          # Configure git to use the credential memory cache
+          git config --global credential.helper cache
+          # Store the credentials
+          echo "url=https://github.com" > credentials.txt
+          echo "username=x-access-token" >> credentials.txt
+          echo "password=${{ secrets.PERSONAL_ACCESS_TOKEN }}" >> credentials.txt
+          git credential approve < credentials.txt
+          rm credentials.txt
           git add .
           git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}"
           git push origin master
