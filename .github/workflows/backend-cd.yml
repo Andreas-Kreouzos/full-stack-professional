@@ -65,17 +65,19 @@ jobs:
           region: ${{ secrets.EB_REGION }}
           deployment_package: Dockerrun.aws.json
       - name: Commit and push Dockerrun.aws.json
+        env:
+          MY_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GIT_ASKPASS: ./askpass.sh
         run: |
+          cat >askpass.sh <<EOF
+          #!/bin/sh
+          echo "\$MY_PAT"
+          EOF
+          chmod +x askpass.sh
           git config user.name github-actions
           git config user.email github-actions@github.com
-          # Configure git to use the credential memory cache
           git config --global credential.helper cache
-          # Store the credentials
-          echo "url=https://github.com" > credentials.txt
-          echo "username=x-access-token" >> credentials.txt
-          echo "password=${{ secrets.PERSONAL_ACCESS_TOKEN }}" >> credentials.txt
-          git credential approve < credentials.txt
-          rm credentials.txt
           git add .
           git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}"
-          git push origin master
+          # Use the script for authentication
+          GIT_ASKPASS=./askpass.sh git push origin master
