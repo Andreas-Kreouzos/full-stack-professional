@@ -6,13 +6,15 @@ function App() {
             <UserProfile
                 name={"Jamila"}
                 age={22}
-                gender={"women"}
-            />
+                gender={"women"}>
+                <p>Hello</p>
+            </UserProfile>
             <UserProfile
                 name={"Marco"}
                 age={34}
-                gender={"men"}
-            />
+                gender={"men"}>
+                <h1>Ciao</h1>
+            </UserProfile>
         </div>
     )
 }
