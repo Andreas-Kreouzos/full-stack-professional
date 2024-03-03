@@ -215,7 +215,7 @@ public class CustomerIT {
 
         Customer expected = new Customer(
                 id, newName, email, age,
-                Gender.MALE);
+                gender);
 
         assertThat(updatedCustomer).isEqualTo(expected);
     }
