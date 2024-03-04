@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "fullstack-api",
-      "image": "andrekreou/full-stack-professional:04.03.2024.15.15.57",
+      "image": "andrekreou/full-stack-professional:04.03.2024.16.55.32",
       "essential": true,
       "memory": 512,
       "portMappings": [
