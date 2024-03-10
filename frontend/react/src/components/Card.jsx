@@ -32,9 +32,12 @@ export default function CardWithImage({id, name, email, age, gender, imageNumber
         <Center py={6}>
             <Box
                 maxW={'300px'}
+                minW={'300px'}
                 w={'full'}
+                m={2}
+
                 bg={useColorModeValue('white', 'gray.800')}
-                boxShadow={'2xl'}
+                boxShadow={'lg'}
                 rounded={'md'}
                 overflow={'hidden'}>
                 <Image
@@ -68,7 +71,7 @@ export default function CardWithImage({id, name, email, age, gender, imageNumber
                         <Text color={'gray.500'}>Age {age} | {gender}</Text>
                     </Stack>
                 </Box>
-                <Stack direction={'row'} justify={'center'} spacing={6}>
+                <Stack direction={'row'} justify={'center'} spacing={6} p={4}>
                     <Stack>
                         <UpdateCustomerDrawer
                             initialValues={{ name, email, age }}
