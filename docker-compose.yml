@@ -14,17 +14,27 @@ services:
       - db
     restart: unless-stopped
   full-stack-professional:
-      container_name: full-stack-professional
-      image: andrekreou/full-stack-professional
-      environment:
-        SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/customer
-      ports:
-        - "8088:8080"
-      networks:
-        - db
-      depends_on:
-        - db
-      restart: unless-stopped
+    container_name: full-stack-professional
+    image: andrekreou/full-stack-professional
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/customer
+    ports:
+      - "8088:8080"
+    networks:
+      - db
+    depends_on:
+      - db
+    restart: unless-stopped
+  full-stack-professional-react:
+    container_name: full-stack-professional-react
+    image: andrekreou/full-stack-professional-react
+    build:
+      context: frontend/react
+    ports:
+      - "3000:5173"
+    depends_on:
+      - full-stack-professional
+    restart: unless-stopped
 
 networks:
   db:
