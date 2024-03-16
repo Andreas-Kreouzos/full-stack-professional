@@ -15,7 +15,7 @@
     },
     {
       "name": "fullstack-api",
-      "image": "andrekreou/full-stack-professional:10.03.2024.14.32.53",
+      "image": "andrekreou/full-stack-professional:16.03.2024.15.12.39",
       "essential": true,
       "memory": 512,
       "portMappings": [
