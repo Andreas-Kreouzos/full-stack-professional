@@ -1,6 +1,8 @@
 package com.andrekreou.jwt;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -37,7 +39,30 @@ public class JWTUtil {
                 .compact();
     }
 
+    public String getSubject(String token) {
+        return getClaims(token).getSubject();
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts
+                .parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
     private SecretKey getSigningKey() {
-        return Jwts.SIG.HS256.key().build();
+        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+    }
+
+    public boolean isTokenValid(String jwt, String username) {
+        String subject = getSubject(jwt);
+        return subject.equals(username) && !isTokenExpired(jwt);
+    }
+
+    private boolean isTokenExpired(String jwt) {
+        Date today = Date.from(Instant.now());
+        return getClaims(jwt).getExpiration().before(today);
     }
 }
